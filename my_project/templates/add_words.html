@@ -2,9 +2,21 @@
 
 {% block content %}
     <h2>Добавить слова</h2>
-    <form method="post">
+    <form method="post" id="add-form">
         {% csrf_token %}
-        {{ form.as_p }}
+        <label for="spanish_word">Слово на испанском:</label>
+        <input type="text" id="spanish_word" name="spanish_word"><br><br>
+        <label for="russian_translation">Перевод:</label>
+        <input type="text" id="russian_translation" name="russian_translation"><br><br>
+        {% if form.errors %}
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        {% endif %}
         <button type="submit" name="add_word">Добавить</button>
     </form>
     
@@ -20,7 +32,7 @@
                 <td>{{ card.spanish_word }}</td>
                 <td>{{ card.russian_translation }}</td>
                 <td>
-                    <form method="post">
+                    <form method="post" id="delete-form-{{ card.id }}">
                         {% csrf_token %}
                         <input type="hidden" name="delete_word" value="{{ card.id }}">
                         <button type="submit" name="delete_word">Удалить</button>

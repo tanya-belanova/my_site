@@ -1,19 +1,23 @@
 {% extends 'base_page.html' %}
 
 {% block content %}
-    <h2>Изучение слов</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Начать изучение</button>
-    </form>
-    
-    {% if word_cards %}
-        <h3>Слова для изучения:</h3>
-        <ul>
-            {% for card in word_cards %}
-                <li>{{ card.spanish_word }} (ваш перевод: __________)</li>
+    {% if form %}
+        <h2>Учить слова</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Отправить</button>
+        </form>
+    {% else %}
+        <h2>Ввод переводов</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% for word in word_cards %}
+                <p>Слово: {{ word.spanish_word }}</p>
+                <label for="translation_{{ word.id }}">Перевод:</label>
+                <input type="text" id="translation_{{ word.id }}" name="translation_{{ word.id }}"><br><br>
             {% endfor %}
-        </ul>
+            <button type="submit">Отправить</button>
+        </form>
     {% endif %}
 {% endblock %}

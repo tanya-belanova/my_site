@@ -1,0 +1,32 @@
+{% extends 'base_page.html' %}
+
+{% block content %}
+    <h2>Добавить слова</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="add_word">Добавить</button>
+    </form>
+    
+    <h3>Существующие слова:</h3>
+    <table>
+        <tr>
+            <th>Слово на испанском</th>
+            <th>Перевод</th>
+            <th>Удалить</th>
+        </tr>
+        {% for card in word_cards %}
+            <tr>
+                <td>{{ card.spanish_word }}</td>
+                <td>{{ card.russian_translation }}</td>
+                <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete_word" value="{{ card.id }}">
+                        <button type="submit" name="delete_word">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

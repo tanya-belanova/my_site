@@ -2,32 +2,27 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>{% block pagetitle %}{% endblock %}</title>
-    <!-- load static -->
+    <title>{% block pagetitle %}Проект Estudio{% endblock %}</title>
     {% load static %}
-    <!-- CSS -->
     <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'custom.css' %}">
 </head>
 <body>
-<main>
-    <div class="container">
-        <header class="border-bottom">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <div class="fs-2 mb-3">
-                    <img src="{% static 'calculator.svg' %}" alt="Проект про математику" width="32" height="32"/>
-                    <span>Проект про математику</span>
-                </div>
-            </a>
+    <main>
+        <header class="d-flex justify-content-center py-4 border-bottom mb-5">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Главная</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Учить слова</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Добавить слова</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Моя статистика</a></li>
+            </ul>
         </header>
-        <div class="p-5 mb-4 bg-light rounded-3" id="title-box">
-            <div class="container-fluid py-5">
-                <h1 class="display-1 fw-bold">{% block page-title %}{% endblock %}</h1>
-                <p class="col-md-8 fs-4">{% block page-lead %}{% endblock %}</p>
-            </div>
+        <div class="container col-xxl-8 px-1 py-3">
+            {% block content %}{% endblock %}
         </div>
-        {% block content %}{% endblock %}
-        <footer class="footer pt-3 mt-4 text-muted border-top">© 2023</footer>
-    </div>
-</main>
+        <footer class="footer pt-3 mt-4 text-muted border-top">
+            Проект разработан Белановой Татьяной в 2025 году
+        </footer>
+    </main>
 </body>
 </html>

@@ -1,0 +1,19 @@
+{% extends 'base_page.html' %}
+
+{% block pagetitle %}Учить слова{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for card in word_cards %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ card.spanish_word }}</h5>
+                        <p class="card-text">{{ card.russian_translation }}</p>
+                        <a href="{% url 'learn_words' %}">Следующее слово</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

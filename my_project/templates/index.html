@@ -1,0 +1,23 @@
+{% extends 'base_page.html' %}
+
+{% load static %}
+
+{% block pagetitle %}Главная страница{% endblock %}
+
+{% block content %}
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <img src="{% static 'avocado.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-white lh-1 mb-3">Estudio</h1>
+            <p class="lead">Проект разработан для изучения испанских слов с помощью карточек. Вы можете добавить слова или посмотреть статистику. Для ввода букв, отсутсвующих в латинском алфавите предусмотрены кнопки. <b>¡Disfruta de tus estudios!</b></p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{% url 'learn_words' %}" class="btn btn-primary btn-lg px-4 me-md-2">Начать учиться</a>
+                <a href="{% url 'add_words' %}" class="btn btn-outline-secondary btn-lg px-4">Добавить слова</a>
+                <a href="{% url 'statistics' %}" class="btn btn-outline-secondary btn-lg px-4">Моя статистика</a>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

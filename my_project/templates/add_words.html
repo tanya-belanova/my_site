@@ -1,4 +1,4 @@
-{% extends 'base_page.html' %}
+{% comment %} {% extends 'base_page.html' %}
 
 {% block content %}
     <h2>Добавить слова</h2>
@@ -41,167 +41,43 @@
             </tr>
         {% endfor %}
     </table>
+{% endblock %} {% endcomment %}
+{% extends 'base_page.html' %}
+
+{% block content %}
+    <div class="bg-body-tertiary p-5 rounded mt-3">
+        {% if form %}
+            <h2>¿Готовы начать?</h2>
+            <div class="d-flex gap-5 justify-content-start py-2">
+                <p style="font-size: 1.6em" class="lead">Введите количество слов для обучения!</p>
+                <div class="form-floating mb-1">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <h2>Ввод переводов</h2>
+            <div class="d-flex gap-5 justify-content-start py-2">
+                <p style="font-size: 1.6em" class="lead">Введите переводы для слов!</p>
+                <div class="form-floating mb-1">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for word in word_cards %}
+                            <div class="form-floating mb-3">
+                                <p class="lead">Слово: {{ word.spanish_word }}</p>
+                                <label for="translation_{{ word.id }}">Перевод:</label>
+                                <input type="text" id="translation_{{ word.id }}" name="translation_{{ word.id }}" class="form-control rounded-3" placeholder="Перевод">
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <footer class="footer pt-3 mt-4 text-muted border-top">Проект разработан Белановой Татьяной в 2025 году</footer>
 {% endblock %}
-<!DOCTYPE html>
-<html lang="ru">
 
-<head>
-  <meta charset="UTF-8">
-  <title>Проект «Estudio»</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: "Gotham Pro"!important;
-      background-color: #3a3a3d!important;
-      color: white;
-    }
-    
-    .nav-link {
-      font-size: 20px!important;
-      color: #dad9de;
-    }
-    
-    .nav-link:hover {
-      color: white!important;
-    }
-    
-    .nav-link.active {
-      background-color: #dad9de!important;
-      transition: box-shadow 0.1s ease-in-out;
-      color: #3a3a3d!important;
-    }
-    
-    .nav-link.active:hover {
-      background-color: white!important;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-    
-    h1 {
-      font-size: 128px!important;
-    }
-    
-    h2 {
-      font-size: 64px!important;
-    }
-    
-    .btn-primary {
-      background-color: #09b025!important;
-      border-color: #0dd62e!important;
-    }
-    
-    .btn-primary:hover {
-      background-color: #0dd62e!important;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-    
-    .container {
-      padding: 0!important;
-    }
-    
-    .footer {
-      position: relative;
-      bottom: 0;
-      width: 100%;
-      height: 60px;
-      color: #dad9de!important;
-    }
-    
-    .form-control {
-        height: 35px!important;
-        width: 80%!important;
-
-    }
-
-    .form-control:focus {
-        border-color: #ccc !important; /* Измените цвет границы на серый */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important; /* Удалите тень */
-    }
-  </style>
-</head>
-
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
-  <meta charset="UTF-8">
-  <title>Проект «Estudio»</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: "Gotham Pro"!important;
-      background-color: #3a3a3d!important;
-      color: white;
-    }
-    
-    .nav-link {
-      font-size: 20px!important;
-      color: #dad9de;
-    }
-    
-    .nav-link:hover {
-      color: white!important;
-    }
-    
-    .nav-link.active {
-      background-color: #dad9de!important;
-      transition: box-shadow 0.1s ease-in-out;
-      color: #3a3a3d!important;
-    }
-    
-    .nav-link.active:hover {
-      background-color: white!important;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-    
-    h1 {
-      font-size: 128px!important;
-    }
-    
-    h2 {
-      font-size: 64px!important;
-    }
-    
-    .btn-primary {
-      background-color: #09b025!important;
-      border-color: #0dd62e!important;
-    }
-    
-    .btn-primary:hover {
-      background-color: #0dd62e!important;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-    
-    .container {
-      padding: 0!important;
-    }
-    
-    .footer {
-      position: relative;
-      bottom: 0;
-      width: 100%;
-      height: 60px;
-      color: #dad9de!important;
-    }
-    
-    .form-control {
-    height: 40px!important; 
-    width: 100px!important;
-    font-size: 20px;
-
-
-    }
-
-    .form-control:focus {
-        border-color: #3a3a3d !important;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
-        box-sizing: border-box !important;
-    }
-    
-    input[type="number" i] {
-    padding-block-end: 10px!important;
-    padding-inline: 10px!important; 
-    padding-block-start: 10px!important;
-    }
-
-  </style>
-</head>

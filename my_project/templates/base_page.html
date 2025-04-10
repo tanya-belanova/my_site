@@ -11,10 +11,18 @@
     <main>
         <header class="d-flex justify-content-center py-4 border-bottom mb-5">
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Главная</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Учить слова</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Добавить слова</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Моя статистика</a></li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/learn_words/' %}active{% endif %}" href="{% url 'learn_words' %}">Учить слова</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/add_words/' %}active{% endif %}" href="{% url 'add_words' %}">Добавить слова</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/statistics/' %}active{% endif %}" href="{% url 'statistics' %}">Моя статистика</a>
+                </li>
             </ul>
         </header>
         <div class="container col-xxl-8 px-1 py-3">

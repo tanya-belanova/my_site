@@ -1,4 +1,4 @@
-{% comment %} {% extends 'base_page.html' %}
+{% extends 'base_page.html' %}
 
 {% block content %}
     <h2>Добавить слова</h2>
@@ -41,43 +41,5 @@
             </tr>
         {% endfor %}
     </table>
-{% endblock %} {% endcomment %}
-{% extends 'base_page.html' %}
-
-{% block content %}
-    <div class="bg-body-tertiary p-5 rounded mt-3">
-        {% if form %}
-            <h2>¿Готовы начать?</h2>
-            <div class="d-flex gap-5 justify-content-start py-2">
-                <p style="font-size: 1.6em" class="lead">Введите количество слов для обучения!</p>
-                <div class="form-floating mb-1">
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit" class="btn btn-primary">Отправить</button>
-                    </form>
-                </div>
-            </div>
-        {% else %}
-            <h2>Ввод переводов</h2>
-            <div class="d-flex gap-5 justify-content-start py-2">
-                <p style="font-size: 1.6em" class="lead">Введите переводы для слов!</p>
-                <div class="form-floating mb-1">
-                    <form method="post">
-                        {% csrf_token %}
-                        {% for word in word_cards %}
-                            <div class="form-floating mb-3">
-                                <p class="lead">Слово: {{ word.spanish_word }}</p>
-                                <label for="translation_{{ word.id }}">Перевод:</label>
-                                <input type="text" id="translation_{{ word.id }}" name="translation_{{ word.id }}" class="form-control rounded-3" placeholder="Перевод">
-                            </div>
-                        {% endfor %}
-                        <button type="submit" class="btn btn-primary">Отправить</button>
-                    </form>
-                </div>
-            </div>
-        {% endif %}
-    </div>
-    <footer class="footer pt-3 mt-4 text-muted border-top">Проект разработан Белановой Татьяной в 2025 году</footer>
 {% endblock %}
 

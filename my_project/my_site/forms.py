@@ -7,4 +7,13 @@ class WordForm(forms.ModelForm):
         fields = ('spanish_word', 'russian_translation')
 
 class LearnWordsForm(forms.Form):
-    num_words = forms.IntegerField(min_value=1, label='Количество слов для изучения')
+    num_words = forms.IntegerField(
+        min_value=1,
+        label = '',
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control rounded-3'
+            }
+        )
+        
+    )

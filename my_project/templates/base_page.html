@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'custom.css' %}">
 </head>
 <body>
-    <main>
+    <main class="d-flex flex-column min-vh-100">
         <header class="d-flex justify-content-center py-4 border-bottom mb-5">
             <ul class="nav nav-pills">
                 <li class="nav-item">
@@ -22,7 +22,7 @@
                 </li>
             </ul>
         </header>
-        <div class="container col-xxl-8 px-1 py-3">
+        <div class="content container col-xxl-8 px-1 py-3 flex-grow-1">
             {% block content %}{% endblock %}
         </div>
         <footer class="footer pt-3 mt-4 text-muted border-top">

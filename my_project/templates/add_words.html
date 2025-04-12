@@ -53,10 +53,10 @@
                             <td>{{ card.spanish_word }}</td>
                             <td>{{ card.russian_translation }}</td>
                             <td>
-                                <form method="post" id="delete-form-{{ card.id }}">
+                                <form method="post" action="{% url 'add_words' %}">
                                     {% csrf_token %}
-                                    <input type="hidden" name="delete_word" value="{{ card.id }}">
-                                    <button type="submit" name="delete_word" class="btn btn-danger w-50">Удалить</button>
+                                    <input type="hidden" name="word_id" value="{{ card.id }}">
+                                    <button type="submit" class="btn btn-danger w-50">Удалить</button>
                                 </form>
                             </td>
                         </tr>

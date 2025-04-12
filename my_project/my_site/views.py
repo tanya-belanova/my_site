@@ -14,14 +14,13 @@ def add_words(request):
             if form.is_valid():
                 form.save()
                 return redirect('add_words')
-        elif 'delete_word' in request.POST:
-            word_id = request.POST.get('delete_word')
+        elif 'word_id' in request.POST:  # Изменено с 'delete_word'
+            word_id = request.POST.get('word_id')
             WordCard.objects.filter(id=word_id).delete()
             return redirect('add_words')
     
     form = WordForm()
     word_cards = WordCard.objects.all()
-    
     return render(request, 'add_words.html', {'form': form, 'word_cards': word_cards})
 
 def learn_words(request):

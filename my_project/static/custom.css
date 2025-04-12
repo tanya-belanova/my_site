@@ -55,8 +55,8 @@ h2 {
 }
 
 .form-control {
-    height: 40px !important;
-    width: 100px !important;
+    height: 40px!important;
+    width: 100px ;
     font-size: 20px;
     margin-bottom: 20px;
 }
@@ -129,4 +129,11 @@ input[type="number" i] {
 .translation-input:focus {
     background: transparent; 
     box-shadow: none;
+}
+
+.add-word-input {
+    height: 40px !important;
+    width: 600px !important;
+    font-size: 20px;
+    margin-bottom: 20px;
 }

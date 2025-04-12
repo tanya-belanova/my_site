@@ -5,6 +5,10 @@ class WordForm(forms.ModelForm):
     class Meta:
         model = WordCard
         fields = ('spanish_word', 'russian_translation')
+        widgets = {
+            'spanish_word': forms.TextInput(attrs={'class': 'form-control rounded-3 add-word-input'}),
+            'russian_translation': forms.TextInput(attrs={'class': 'form-control rounded-3 add-word-input'})
+        }
 
 class LearnWordsForm(forms.Form):
     num_words = forms.IntegerField(

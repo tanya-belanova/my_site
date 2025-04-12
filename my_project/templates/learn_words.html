@@ -20,10 +20,14 @@
                                 {% endfor %}
                             {% endif %}
                         </div>
+                        {% if form.non_field_errors %}
+                            <span class="error-message">{{ form.non_field_errors }}</span>
+                        {% endif %}
                         <button type="submit" class="btn btn-primary">Подтвердить</button>
                     </form>
                 </div>
             </div>
+            
             {% else %}
             <h2>Введите перевод всех слов!</h2>
             <div class="d-flex gap-5 justify-content-start py-2">

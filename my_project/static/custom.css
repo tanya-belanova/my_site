@@ -33,12 +33,13 @@ h2 {
 }
 
 .btn-primary {
-    background-color: #ff00a6!important;
-    border-color: #870624!important;
+    background-color: #089021!important;
+    border-color: #089021!important;
 }
 
 .btn-primary:hover {
-    background-color: #0d9323!important;
+    background-color: #067b1c!important;
+    border-color: #067b1c!important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 

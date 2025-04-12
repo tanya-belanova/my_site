@@ -32,24 +32,38 @@
     </form>
     
     <h3>Существующие слова:</h3>
-    <table>
-        <tr>
-            <th>Слово на испанском</th>
-            <th>Перевод</th>
-            <th>Удалить</th>
-        </tr>
-        {% for card in word_cards %}
-            <tr>
-                <td>{{ card.spanish_word }}</td>
-                <td>{{ card.russian_translation }}</td>
-                <td>
-                    <form method="post" id="delete-form-{{ card.id }}">
-                        {% csrf_token %}
-                        <input type="hidden" name="delete_word" value="{{ card.id }}">
-                        <button type="submit" name="delete_word">Удалить</button>
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="d-flex gap-5 justify-content-start py-2">
+        <div class="form-floating mb-1">
+            <table class="table table-striped">
+                <colgroup>
+                    <col style='width: 33%;'>
+                    <col style='width: 33%;'>
+                    <col style='width: 33%;'>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Слово на испанском</th>
+                        <th>Перевод</th>
+                        <th>Удалить</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for card in word_cards %}
+                        <tr>
+                            <td>{{ card.spanish_word }}</td>
+                            <td>{{ card.russian_translation }}</td>
+                            <td>
+                                <form method="post" id="delete-form-{{ card.id }}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="delete_word" value="{{ card.id }}">
+                                    <button type="submit" name="delete_word" class="btn btn-danger w-50">Удалить</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
 {% endblock %}

@@ -30,42 +30,40 @@ def learn_words(request):
             form = LearnWordsForm(request.POST)
             if form.is_valid():
                 num_words = form.cleaned_data['num_words']
-                word_cards = list(WordCard.objects.all())
-                random_words = random.sample(word_cards, min(num_words, len(word_cards)))
+                all_words = list(WordCard.objects.all())
+                
+                num_words = min(num_words, len(all_words))
+                
+                if num_words < 1:
+                    form.add_error('num_words', 'Число должно быть не менее 1')
+                    return render(request, 'learn_words.html', {'form': form})
+                
+                random_words = random.sample(all_words, num_words)
                 return render(request, 'learn_words.html', {'word_cards': random_words})
-        elif any(key.startswith('translation_') for key in request.POST.keys()):
-            word_cards = WordCard.objects.all()
-            translations = {}
-            for word in word_cards:
-                translation = request.POST.get(f'translation_{word.id}')
-                translations[word.id] = translation
+            
+            return render(request, 'learn_words.html', {'form': form})
 
+        elif any(key.startswith('translation_') for key in request.POST):
             results = []
-            for word in word_cards:
-                if f'translation_{word.id}' in request.POST:
-                    correct_translation = word.russian_translation
-                    user_translation = translations[word.id]
-                    if user_translation.lower() == correct_translation.lower():
+            for key, value in request.POST.items():
+                if key.startswith('translation_'):
+                    word_id = key.split('_')[1]
+                    try:
+                        word = WordCard.objects.get(id=word_id)
+                        user_translation = value.strip().lower()
+                        correct = user_translation == word.russian_translation.lower()
                         results.append({
                             'word': word.spanish_word,
-                            'correct': True,
-                            'user_translation': user_translation,
-                            'correct_translation': correct_translation
+                            'correct': correct,
+                            'user_translation': value,
+                            'correct_translation': word.russian_translation
                         })
-                    else:
-                        results.append({
-                            'word': word.spanish_word,
-                            'correct': False,
-                            'user_translation': user_translation,
-                            'correct_translation': correct_translation
-                        })
+                    except WordCard.DoesNotExist:
+                        continue
+            
+            return render(request, 'results.html', {'results': results})
+        
+        return render(request, 'learn_words.html', {'form': LearnWordsForm()})
 
-            return render(request, 'results.html', {
-                'results': results
-            })
-        else:
-            # Обработка случая, когда запрос не содержит 'num_words' и 'translation_'
-            return render(request, 'learn_words.html', {'error': 'Неправильный запрос'})
-    else:
-        form = LearnWordsForm()
-        return render(request, 'learn_words.html', {'form': form})
+    form = LearnWordsForm()
+    return render(request, 'learn_words.html', {'form': form})

@@ -4,10 +4,7 @@
     <h2>Добавить слова</h2>
     <form method="post" id="add-form">
         {% csrf_token %}
-        <label for="spanish_word">Слово на испанском:</label>
-        <input type="text" id="spanish_word" name="spanish_word"><br><br>
-        <label for="russian_translation">Перевод:</label>
-        <input type="text" id="russian_translation" name="russian_translation"><br><br>
+        {{ form.as_p }}
         {% if form.errors %}
             <ul>
                 {% for field in form %}
@@ -42,4 +39,3 @@
         {% endfor %}
     </table>
 {% endblock %}
-

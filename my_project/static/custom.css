@@ -58,6 +58,7 @@ h2 {
     height: 40px !important;
     width: 100px !important;
     font-size: 20px;
+    margin-bottom: 20px;
 }
 
 .form-control:focus {
@@ -70,4 +71,62 @@ input[type="number" i] {
     padding-block-end: 10px !important;
     padding-inline: 10px !important;
     padding-block-start: 10px !important;
+}
+
+::-webkit-validation-bubble-message {
+    display: none!important;
+}
+
+:invalid {
+    box-shadow: none!important;
+}
+
+.input-container {
+    position: relative;
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+}
+
+.error-message {
+    color: #dad9de;
+    position: relative!important;
+    margin-top: -20px;
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+.table {
+    width: 950px!important;
+    margin: 0 auto!important;
+    padding: 10rem!important;
+
+}
+.table td, .table th {
+    border: 2px solid #3a3a3d!important;
+}
+.table th {
+    color: white!important;
+    font-size: 26px!important;
+    padding: 10px;
+}
+
+.table td {
+    color: white!important;
+    font-size: 22px!important;
+    padding: 5px
+}
+
+.translation-input {
+    width: 100%!important;
+    height: 100%!important;
+    background: transparent; 
+    border: none; 
+    outline: none;
+    color: white!important
+}
+
+.translation-input:focus {
+    background: transparent; 
+    box-shadow: none;
 }

@@ -1,0 +1,33 @@
+{% extends 'base_page.html' %}
+
+{% block content %}
+    <div class="bg-body-teritary p-5 rounded mt-3">
+        <h2>Результаты</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Слово</th>
+                    <th>Ваш перевод</th>
+                    <th>Правильный перевод</th>
+                    <th>Результат</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                    <tr>
+                        <td>{{ result.word }}</td>
+                        <td>{{ result.user_translation }}</td>
+                        <td>{{ result.correct_translation }}</td>
+                        <td>
+                            {% if result.correct %}
+                                <span style="color: green;">Правильно!</span>
+                            {% else %}
+                                <span style="color: red;">Неправильно</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

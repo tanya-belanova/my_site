@@ -5,29 +5,53 @@
         {% if form %}
             <h2>¿Готовы начать?</h2>
             <div class="d-flex gap-5 justify-content-start py-2">
-                <p style="font-size: 1.6em" class="lead">Введите количество слов для обучения!</p>
+                <p style="font-size: 1.6em; position: relative; top: 20px" class="lead">Введите количество слов для обучения!</p>
                 <div class="form-floating mb-1">
-                    <form method="post">
+                    <form method="post" novalidate>
                         {% csrf_token %}
-                        {{ form.as_p }}
+                        {{ form.num_words.label_tag }}
+                        <div class="input-container">
+                            {{ form.num_words }}
+                            {% if form.num_words.errors %}
+                                {% for error in form.num_words.errors %}
+                                    {% if error != 'Это поле обязательно.' %}
+                                        <span class="error-message">{{ error }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                         <button type="submit" class="btn btn-primary">Подтвердить</button>
                     </form>
                 </div>
             </div>
-        {% else %}
-            <h2>Ввод переводов</h2>
+            {% else %}
+            <h2>Введите перевод всех слов!</h2>
             <div class="d-flex gap-5 justify-content-start py-2">
-                <p style="font-size: 0.8em" class="lead">Введите переводы для слов!</p>
                 <div class="form-floating mb-1">
                     <form method="post">
                         {% csrf_token %}
-                        {% for word in word_cards %}
-                            <div class="form-floating mb-3">
-                                <p class="lead">Слово: {{ word.spanish_word }}</p>
-                                <label for="translation_{{ word.id }}">Перевод:</label>
-                                <input type="text" id="translation_{{ word.id }}" name="translation_{{ word.id }}" class="form-control rounded-3" placeholder="Перевод">
-                            </div>
-                        {% endfor %}
+                        <table class="table table-striped">
+                            <thead>
+                                <colgroup>
+                                    <col style='width: 50%;'>
+                                    <col style='width: 50%'>
+                                </colgroup>
+                                <tr>
+                                    <th>Слово</th>
+                                    <th>Перевод</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for word in word_cards %}
+                                    <tr>
+                                        <td>{{ word.spanish_word }}</td>
+                                        <td>
+                                            <input type="text" id="translation_{{ word.id }}" name="translation_{{ word.id }}" class="translation-input form-control rounded-3"  autocomplete="off">
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                         <button type="submit" class="btn btn-primary">Отправить</button>
                     </form>
                 </div>
